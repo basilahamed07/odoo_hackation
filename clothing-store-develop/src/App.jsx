@@ -6,6 +6,7 @@ import { authChangedListener, createUserDocFromAuth } from './utils/firebase/fir
 import { setCurrentUser } from './store/user.reducer.js';
 import SpinnerComponent from './components/spinner/spinner.component.jsx';
 import UserProfile from './routes/user-profile/user-profile.component.jsx';
+import ListItemPage from './components/list-item/list-item.component.jsx';
 
 const Navigation = lazy(() => import('./routes/navigation/navigation.component'));
 const Home = lazy(() => import('./routes/home/home.component'));
@@ -42,6 +43,7 @@ const App = () => {
           <Route path='login' element={<Login />} />
           <Route path='cart' element={<CartComponent />} />
           <Route path='user-profile' element={<UserProfile/>}/>
+          <Route path='list-item' element={<ListItemPage />} /> 
         </Route>
       </Routes>
     </Suspense>

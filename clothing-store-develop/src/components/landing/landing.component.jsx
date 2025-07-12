@@ -35,7 +35,7 @@ const LandingComponent = () => {
             )}
           </div>
         <button className="nav-button" onClick={() => navigate('/shop')}>Browse All items</button>
-        <button className="nav-button">List an Item</button>
+        <button className="nav-button" onClick={() => navigate('/list-item')}>List an Item</button>
       </div>
     </div>
   );
