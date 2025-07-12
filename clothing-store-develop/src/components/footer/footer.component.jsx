@@ -12,7 +12,7 @@ const FooterComponent = () => {
         </span>
         <div className='footer-icons'>
         
-          <a href='https://github.com/fleps' title='fleps github profile'>
+          <a href='https://github.com/basilahamed07/odoo_hackation.git' title='Odoo Hackathon'>
             <img src={githubIcon} alt='Github' />
           </a>
         </div>

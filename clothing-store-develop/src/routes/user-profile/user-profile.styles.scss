@@ -1,0 +1,96 @@
+.login-wrapper {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem 1.5rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  
+    .profile-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap; // for responsiveness
+    }
+  
+    .user-details {
+      flex: 1;
+      min-width: 220px;
+  
+      .detail-row {
+        display: flex;
+        margin: 0.6rem 0;
+        font-size: 1rem;
+        color: #444;
+  
+        .label {
+          font-weight: bold;
+          margin-right: 0.5rem;
+          min-width: 60px;
+        }
+  
+        .value {
+          color: #222;
+        }
+      }
+    }
+  
+    .change-password {
+      flex: 1;
+      min-width: 260px;
+  
+      h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+  
+      input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        color: #333;
+        transition: border-color 0.2s;
+  
+        &:focus {
+          border-color: #888;
+          outline: none;
+        }
+      }
+  
+      button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #000;
+        color: #fff;
+        font-size: 1.05rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+  
+        &:hover {
+          background-color: #333;
+        }
+  
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  
+    @media (max-width: 480px) {
+      padding: 1rem;
+  
+      .change-password input,
+      .change-password button {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+      }
+    }
+  }
+  

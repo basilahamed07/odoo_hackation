@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
+    "6-clothing-store": "file:",
     "firebase": "^10.9.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
