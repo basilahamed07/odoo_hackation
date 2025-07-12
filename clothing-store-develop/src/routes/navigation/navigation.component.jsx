@@ -22,6 +22,12 @@ navigate("/")
 
 
 };
+
+const userdashboard = () =>{
+navigate("/user-profile")
+
+
+}
   return (
     <>
       <div className='navigation'>
@@ -35,8 +41,11 @@ navigate("/")
               currentUser === 'logged-out' && <Link className='nav-link' to={'/login'}>Login</Link>
             }
             {
-              (currentUser !== null && currentUser !== 'logged-out') && (
+              (currentUser !== null && currentUser !== 'logged-out') && (<>
+                                <span  className='nav-link' onClick={userdashboard}>Profile</span>
+
                 <span onClick={logOutUserfromsession} className='nav-link'>Logout</span>
+                </>
               )
             }
             <CartIcon />

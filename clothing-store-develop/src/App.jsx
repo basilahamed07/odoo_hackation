@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { authChangedListener, createUserDocFromAuth } from './utils/firebase/firebase.utils.js';
 import { setCurrentUser } from './store/user.reducer.js';
 import SpinnerComponent from './components/spinner/spinner.component.jsx';
+import UserProfile from './routes/user-profile/user-profile.component.jsx';
 
 const Navigation = lazy(() => import('./routes/navigation/navigation.component'));
 const Home = lazy(() => import('./routes/home/home.component'));
@@ -40,6 +41,7 @@ const App = () => {
           <Route path='shop/*' element={<Shop />} />
           <Route path='login' element={<Login />} />
           <Route path='cart' element={<CartComponent />} />
+          <Route path='user-profile' element={<UserProfile/>}/>
         </Route>
       </Routes>
     </Suspense>

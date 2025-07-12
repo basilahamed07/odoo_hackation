@@ -7,6 +7,7 @@ import CategoryListPage from '../category-list-page/category-list-page.component
 import Category from '../category/category.component';
 
 import './shop.styles.scss';
+import UserProfile from '../user-profile/user-profile.component';
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Shop = () => {
     <Routes>
       <Route index element={<CategoryListPage />} />
       <Route path=':category' element={<Category />} />
+      <Route path=':user-profile' element={<UserProfile/>}/>
     </Routes>
   );
 }
