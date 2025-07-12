@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
-import { addItemToCart, removeOrDecreaseItem } from '../../store/minicart.reducer';
+import { addItemToCart, removeOrDecreaseItem,clearCart } from '../../store/minicart.reducer';
 import { selectBagTotalPrice, selectCartItems } from '../../store/minicart.selector';
 
 import './cart.styles.scss';
@@ -10,6 +10,46 @@ const CartComponent = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItems);
   const bagTotalPrice = useSelector(selectBagTotalPrice);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const navigate = useNavigate();
+const checkout = () => {
+
+  console.log(currentUser);
+
+  if(currentUser === "logged-out")
+  {
+  dispatch(clearCart());
+    navigate('/login')
+  }
+  else if (currentUser!= null){
+
+ const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+  
+  if (!storedUser || !storedUser.displayName) {
+    console.error('No username found in currentUser');
+    return;
+  }
+  
+  // 2. Get username as key
+  const username = storedUser.displayName; // or storedUser.name if username not available
+  
+  // 3. Get current cartItems from Redux or state (example assumes you have it in a variable)
+  // For example, if you use Redux selector:
+  // const cartItems = useSelector(selectCartItems);
+  // Here assume cartItems is available
+  
+  // 4. Get existing orders object from localStorage or initialize empty
+  const existingOrders =   {};
+  
+  // 5. Set or update the user’s orders with cartItems
+  existingOrders[username] = cartItems;  // cartItems should be an array or object representing current cart
+  
+  // 6. Save back to localStorage
+  localStorage.setItem('orders', JSON.stringify(existingOrders));
+
+
+  }
+}
 
   const handleAddToCart = (product) => {
     if (product.quantity < 10) {
@@ -79,6 +119,12 @@ const CartComponent = () => {
                 )
               })
             }
+
+
+<div className="checkout-wrapper">
+  <button className="checkout-btn" onClick={checkout}>Checkout</button>
+</div>
+
           </>
         )
       }
