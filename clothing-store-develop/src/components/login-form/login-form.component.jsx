@@ -5,6 +5,9 @@ import {
 } from '../../utils/firebase/firebase.utils.js';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from "../../store/user.reducer.js"; // adjust path as needed
+import { useNavigate } from 'react-router-dom';
 
 const defaultFormFields = {
   email: '',
@@ -14,6 +17,8 @@ const defaultFormFields = {
 const LoginForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const clearForm = useCallback(() => {
     setFormFields(defaultFormFields);
@@ -25,14 +30,31 @@ const LoginForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const users = JSON.parse(localStorage.getItem('registeredUsers')) || [];
 
-    try {
-      await loginUserWithEmailPwd(email, password);
+    const foundUser = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (foundUser) {
+          dispatch(setCurrentUser('logged-in'));
+
+      alert(`Welcome back, ${foundUser.displayName}!`);
+          localStorage.setItem('currentUser', JSON.stringify(foundUser));
+navigate("/shop");
+      // You could navigate or set login state here
+    } else {
+      alert('Invalid email or password.');
       clearForm();
-
-    } catch (error) {
-      console.log(`User authentication error: ${error}`);
     }
+
+
+
+
+
+
+
+
   };
 
   const handleChange = (event) => {

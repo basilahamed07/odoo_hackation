@@ -21,34 +21,16 @@ const RegisterForm = () => {
     setFormFields(defaultFormFields);
   }, []);
 
-  // Handle the submit, async as it uses external auth
-  const handleSubmit = useCallback(async (event) => {
-    event.preventDefault();
 
-    //Verify is password matches, can extend this to add more checks like format, length,etc
-    if (password !== confirmPassword) {
-      alert("Passwords doesn't match");
-      return;
-    }
+ const register = () => {
+    const existingList = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+    const updatedList = [...existingList, formFields];
 
-    try {
-      // Call our utils method passing the email and password.
-      // This will call firebase method to create the user, passing the email and password, or return an error.
-      const { user } = await createUserWithEmailPwd(email, password);
+    localStorage.setItem('registeredUsers', JSON.stringify(updatedList));
 
-      // If the above is successful, this call the method to actually save the user into the site database.
-      await createUserDocFromAuth(user, { displayName });
-      clearForm();
-
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        // TODO: handle this with better UI at the end
-        alert('Cannot create user, email already in use');
-      } else {
-        console.log(`User creation error: ${error.message}`)
-      }
-    }
-  }, [formFields]); //eslint-disable-line react-hooks/exhaustive-deps
+    alert('User registered!');
+    setFormFields(defaultFormFields); // reset form
+  };
 
   // Basic function called by the inputs onChange event
   const handleChange = (event) => {
@@ -64,7 +46,7 @@ const RegisterForm = () => {
     <div className='register-container'>
       <h2>Don&apos;t have an account?</h2>
       <span>Register filling the information below.</span>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={register}>
           {/* set each field value to the destructured values from the top */}
 
         <FormInput
@@ -96,7 +78,7 @@ const RegisterForm = () => {
           value={confirmPassword} required
         />
         <div>
-          <Button type='submit' style='' label='Register' />
+          <Button type='submit' style=''  label='Register' />
         </div>
       </form>
     </div>
